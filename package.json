@@ -1,5 +1,5 @@
 {
-  "name": "Drawsync",
+  "name": "drawsync",
   "private": true,
   "scripts": {
     "build": "turbo run build",

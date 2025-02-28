@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String     @id @default(uuid())
+  name     String
+  email    String     @unique
+  password String
+  chats    Chat[]
+  rooms    Room[]
+  RoomUser RoomUser[]
+}
+
+model Room {
+  id        Int        @id @default(autoincrement())
+  slug      String     @unique
+  createdAt DateTime   @default(now())
+  adminId   String
+  admin     User       @relation(fields: [adminId], references: [id])
+  chats     Chat[]
+  users     RoomUser[] // Tracks users in the room
+  state     RoomState?
+}
+
+model Chat {
+  id        Int      @id @default(autoincrement())
+  message   String
+  userId    String
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model RoomState {
+  id     String @id @default(uuid())
+  roomId Int    @unique
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  shapes Json   @default("[]")
+}
+
+model RoomUser {
+  id       String   @id @default(uuid())
+  roomId   Int
+  userId   String
+  room     Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt DateTime @default(now())
+}
