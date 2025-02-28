@@ -18,14 +18,36 @@ importers:
         specifier: 5.7.3
         version: 5.7.3
 
-  apps/Drawsync:
+  apps/backend:
     dependencies:
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@types/express':
+        specifier: ^5.0.0
+        version: 5.0.0
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@types/node':
+        specifier: ^22
+        version: 22.13.0
+
+  apps/frontend:
+    dependencies:
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      db:
-        specifier: workspace:*
-        version: link:../../packages/db
       next:
         specifier: ^15.1.6
         version: 15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -58,24 +80,15 @@ importers:
         specifier: 5.7.3
         version: 5.7.3
 
-  apps/backend:
+  apps/websocket:
     dependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      '@types/express':
-        specifier: ^5.0.0
-        version: 5.0.0
-      db:
+    devDependencies:
+      '@repo/db':
         specifier: workspace:*
         version: link:../../packages/db
-      express:
-        specifier: ^4.21.2
-        version: 4.21.2
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
       '@types/node':
         specifier: ^22
         version: 22.13.0

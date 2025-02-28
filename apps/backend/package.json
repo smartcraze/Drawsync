@@ -1,5 +1,5 @@
 {
-  "name": "backend-drawsync",
+  "name": "@repo/backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,7 +15,7 @@
   "dependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/express": "^5.0.0",
-    "db": "workspace:*",
+    "@repo/db": "workspace:*",
     "express": "^4.21.2"
   },
   "devDependencies": {
