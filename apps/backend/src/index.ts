@@ -1,17 +1,14 @@
 import express from "express";
-import db from "@repo/db";
-import { authRouter } from "./routes/auth.js";
-import { roomsRouter } from "./routes/rooms.js";
-import { chatRouter } from "./routes/chat.js"
-
+import { authRouter } from "./routes/auth";
+import { roomsRouter } from "./routes/rooms";
+import { chatRouter } from "./routes/chat";
 
 const app = express();
 app.use(express.json());
 
-
 app.use("/auth", authRouter);
-app.use("/rooms", roomsRouter);
-app.use("/chat", chatRouter);
+// app.use("/rooms", roomsRouter);
+// app.use("/chat", chatRouter);
 
 app.get("/health", (req, res) => {
   res.send("OK");

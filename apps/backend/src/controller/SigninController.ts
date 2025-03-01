@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SigninTypes } from "../zodTypes/Types.js";
+import { SigninTypes } from "../zodTypes/Types";
 import db from "@repo/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -34,6 +34,12 @@ export const SigninController = async (req: Request, res: Response) => {
       process.env.JWT_SECRET as string
     );
 
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 2 * 60 * 60 * 1000, // 1 hour
+    });
+
     res.status(200).json({
       message: "User logged in successfully",
       token,
@@ -48,8 +54,15 @@ export const SigninController = async (req: Request, res: Response) => {
 };
 
 export const SignoutController = async (req: Request, res: Response) => {
-  res.clearCookie("token");
-  res.status(200).json({
-    message: "User logged out successfully",
-  });
+  try {
+    res.clearCookie("token");
+    res.status(200).json({
+      message: "User logged out successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
 };
