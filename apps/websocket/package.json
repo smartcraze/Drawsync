@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "tsc -b && node dist/index.js"
   },
@@ -11,11 +11,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/db": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/ws": "^8.5.14",
+    "jsonwebtoken": "^9.0.2",
+    "ws": "^8.18.1"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^22",
-    "@repo/db": "workspace:*"
+    "@types/node": "^22"
   }
 }
